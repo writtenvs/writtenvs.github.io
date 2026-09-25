@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLADE — барбершоп</title>
+<meta name="description" content="Барбершоп BLADE: мужские стрижки, бритьё и уход за бородой. Онлайн-запись.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f10;
+    --bg-2: #18181a;
+    --card: #1f1f22;
+    --text: #f2efe9;
+    --muted: #9c978f;
+    --accent: #c9a063;
+    --accent-2: #e2bd82;
+    --line: #2c2c30;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .02em; line-height: 1.1; }
+  h2 { font-size: clamp(32px, 5vw, 48px); margin-bottom: 14px; }
+  .lead { color: var(--muted); max-width: 560px; }
+  section { padding: 96px 0; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 12px; display: block; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 30px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid transparent; cursor: pointer; transition: .2s; font-family: inherit; }
+  .btn-primary { background: var(--accent); color: #111; }
+  .btn-primary:hover { background: var(--accent-2); transform: translateY(-2px); }
+  .btn-ghost { border-color: var(--line); color: var(--text); background: transparent; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* header */
+  header { position: fixed; inset: 0 0 auto; z-index: 50; transition: .3s; }
+  header.scrolled { background: rgba(15,15,16,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { font-family: Oswald; font-size: 26px; font-weight: 700; letter-spacing: .12em; }
+  .logo span { color: var(--accent); }
+  .menu { display: flex; gap: 32px; font-size: 14px; color: var(--muted); }
+  .menu a:hover { color: var(--text); }
+  .nav .btn { padding: 11px 22px; }
+  .burger { display: none; background: none; border: 0; color: var(--text); font-size: 26px; cursor: pointer; }
+
+  /* hero */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px;
+    background: linear-gradient(90deg, rgba(15,15,16,.97) 30%, rgba(15,15,16,.55)), url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1600&q=80") center/cover; }
+  .hero h1 { font-size: clamp(44px, 8vw, 92px); margin-bottom: 22px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { font-size: 18px; color: var(--muted); max-width: 480px; margin-bottom: 36px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .stats { display: flex; gap: 48px; margin-top: 64px; flex-wrap: wrap; }
+  .stats b { font-family: Oswald; font-size: 40px; color: var(--accent); display: block; line-height: 1; }
+  .stats span { font-size: 13px; color: var(--muted); }
+
+  /* services */
+  .services { background: var(--bg-2); }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  .service { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; transition: .25s; }
+  .service:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .service .ico { font-size: 30px; margin-bottom: 18px; }
+  .service h3 { font-size: 22px; margin-bottom: 10px; }
+  .service p { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  .service .price { font-family: Oswald; font-size: 24px; color: var(--accent); }
+
+  /* about */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .about-img { border-radius: var(--radius); aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+  .features { margin-top: 32px; display: grid; gap: 18px; }
+  .feature { display: flex; gap: 16px; }
+  .feature i { font-style: normal; flex: 0 0 44px; height: 44px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); display: grid; place-items: center; color: var(--accent); }
+  .feature h4 { font-size: 16px; margin-bottom: 2px; }
+  .feature p { font-size: 14px; color: var(--muted); }
+
+  /* masters */
+  .masters { background: var(--bg-2); }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+  .master img { border-radius: var(--radius); aspect-ratio: 3/4; object-fit: cover; width: 100%; filter: grayscale(.4); transition: .3s; }
+  .master:hover img { filter: none; }
+  .master h3 { font-size: 20px; margin-top: 16px; }
+  .master span { color: var(--muted); font-size: 14px; }
+
+  /* reviews */
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  .review { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+  .stars { color: var(--accent); letter-spacing: 3px; margin-bottom: 14px; }
+  .review p { color: #d4d0c8; font-size: 15px; margin-bottom: 20px; }
+  .review b { font-size: 14px; }
+  .review small { color: var(--muted); display: block; font-size: 12px; }
+
+  /* booking */
+  .booking { background: linear-gradient(135deg, #1c1811, #0f0f10); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  form { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; display: grid; gap: 14px; }
+  label { font-size: 13px; color: var(--muted); display: grid; gap: 6px; }
+  input, select { width: 100%; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; }
+  input:focus, select:focus { outline: none; border-color: var(--accent); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-note { font-size: 12px; color: var(--muted); text-align: center; }
+  .success { display: none; text-align: center; padding: 40px 10px; }
+  .success h3 { font-size: 26px; color: var(--accent); margin-bottom: 8px; }
+
+  /* contacts */
+  .contacts-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; margin-top: 40px; }
+  .contact-list { display: grid; gap: 24px; }
+  .contact-list small { color: var(--muted); font-size: 13px; display: block; }
+  .contact-list b { font-size: 18px; font-weight: 500; }
+  .map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+  .map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; filter: grayscale(1) invert(.9) contrast(.9); }
+
+  footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  .float-cta { position: fixed; right: 20px; bottom: 20px; z-index: 40; width: 58px; height: 58px; border-radius: 50%; background: #29a9eb; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.4); font-size: 26px; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    .grid-3, .reviews-grid { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .about-grid, .booking-grid, .contacts-grid { grid-template-columns: 1fr; gap: 40px; }
+    .menu { display: none; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line); }
+    .menu.open { display: flex; }
+    .menu a { padding: 16px 20px; border-top: 1px solid var(--line); }
+    .burger { display: block; }
+    .nav .btn { display: none; }
+    section { padding: 72px 0; }
+  }
+  @media (max-width: 520px) {
+    .row { grid-template-columns: 1fr; }
+    .stats { gap: 28px; }
+    .hero-actions .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="container nav">
+    <a href="#" class="logo">BLA<span>DE</span></a>
+    <nav class="menu" id="menu">
+      <a href="#services">Услуги</a>
+      <a href="#about">О нас</a>
+      <a href="#masters">Мастера</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="#booking" class="btn btn-primary">Записаться</a>
+    <button class="burger" id="burger" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Барбершоп в центре города</span>
+    <h1>Стрижка,<br>которая <em>работает</em><br>на тебя</h1>
+    <p>Мужские стрижки, королевское бритьё и уход за бородой. Без очередей и спешки.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn btn-primary">Записаться онлайн</a>
+      <a href="#services" class="btn btn-ghost">Смотреть цены</a>
+    </div>
+    <div class="stats">
+      <div><b>8 лет</b><span>работаем для вас</span></div>
+      <div><b>12 000+</b><span>довольных клиентов</span></div>
+      <div><b>4.9 ★</b><span>рейтинг на картах</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <span class="eyebrow">Услуги и цены</span>
+    <h2>Что мы делаем</h2>
+    <p class="lead">Каждая услуга включает консультацию, мытьё головы и укладку профессиональной косметикой.</p>
+    <div class="grid-3">
+      <div class="service reveal"><div class="ico">✂️</div><h3>Мужская стрижка</h3><p>Классика, фейд, андеркат — подберём форму под тип лица и волос.</p><div class="price">1 500 ₽</div></div>
+      <div class="service reveal"><div class="ico">🧔</div><h3>Моделирование бороды</h3><p>Форма, контуры, горячее полотенце и уходовое масло.</p><div class="price">1 000 ₽</div></div>
+      <div class="service reveal"><div class="ico">🪒</div><h3>Королевское бритьё</h3><p>Опасная бритва, распаривание, компресс и успокаивающий бальзам.</p><div class="price">1 300 ₽</div></div>
+      <div class="service reveal"><div class="ico">💈</div><h3>Стрижка + борода</h3><p>Полный образ за один визит. Самая популярная услуга.</p><div class="price">2 200 ₽</div></div>
+      <div class="service reveal"><div class="ico">👦</div><h3>Детская стрижка</h3><p>Для юных джентльменов до 12 лет. Терпеливо и аккуратно.</p><div class="price">1 000 ₽</div></div>
+      <div class="service reveal"><div class="ico">🎨</div><h3>Камуфляж седины</h3><p>Естественный результат за 10 минут, держится до 6 недель.</p><div class="price">900 ₽</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container about-grid">
+    <img class="about-img reveal" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=900&q=80" alt="Интерьер барбершопа">
+    <div class="reveal">
+      <span class="eyebrow">О нас</span>
+      <h2>Место, куда хочется возвращаться</h2>
+      <p class="lead">Мы не просто стрижём — мы создаём атмосферу: хорошая музыка, кофе, разговоры и результат, которым ты гордишься.</p>
+      <div class="features">
+        <div class="feature"><i>★</i><div><h4>Опытные мастера</h4><p>Стаж каждого барбера — от 5 лет, регулярное обучение.</p></div></div>
+        <div class="feature"><i>☕</i><div><h4>Кофе и напитки</h4><p>Бесплатно для каждого гостя, пока ждёшь или стрижёшься.</p></div></div>
+        <div class="feature"><i>⏱</i><div><h4>Точно по времени</h4><p>Записался на 15:00 — садишься в кресло в 15:00.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="masters" id="masters">
+  <div class="container">
+    <span class="eyebrow">Команда</span>
+    <h2>Наши мастера</h2>
+    <div class="grid-4">
+      <div class="master reveal"><img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=600&q=80" alt="Мастер Алексей"><h3>Алексей</h3><span>Топ-барбер · 9 лет</span></div>
+      <div class="master reveal"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80" alt="Мастер Дмитрий"><h3>Дмитрий</h3><span>Барбер · 6 лет</span></div>
+      <div class="master reveal"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" alt="Мастер Артём"><h3>Артём</h3><span>Барбер · 5 лет</span></div>
+      <div class="master reveal"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80" alt="Мастер Игорь"><h3>Игорь</h3><span>Арт-директор · 12 лет</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <span class="eyebrow">Отзывы</span>
+    <h2>Что говорят клиенты</h2>
+    <div class="reviews-grid">
+      <div class="review reveal"><div class="stars">★★★★★</div><p>Хожу к Алексею уже два года. Ни разу не было, чтобы ушёл недовольным. Атмосфера — огонь.</p><b>Максим К.</b><small>Яндекс Карты</small></div>
+      <div class="review reveal"><div class="stars">★★★★★</div><p>Наконец нашёл место, где делают нормальную бороду. Королевское бритьё — отдельный кайф.</p><b>Сергей В.</b><small>2ГИС</small></div>
+      <div class="review reveal"><div class="stars">★★★★★</div><p>Привёл сына, мастер нашёл подход за минуту. Теперь ходим вместе по субботам.</p><b>Андрей П.</b><small>Яндекс Карты</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="booking">
+  <div class="container booking-grid">
+    <div class="reveal">
+      <span class="eyebrow">Онлайн-запись</span>
+      <h2>Запишись за 30 секунд</h2>
+      <p class="lead">Оставь заявку — администратор перезвонит в течение 10 минут и подтвердит время.</p>
+    </div>
+    <form id="form" class="reveal">
+      <div id="formFields" style="display:grid;gap:14px">
+        <label>Имя<input name="name" required placeholder="Как к вам обращаться"></label>
+        <label>Телефон<input name="phone" type="tel" required placeholder="+7 (___) ___-__-__"></label>
+        <div class="row">
+          <label>Услуга
+            <select name="service">
+              <option>Мужская стрижка</option><option>Стрижка + борода</option><option>Моделирование бороды</option><option>Королевское бритьё</option><option>Детская стрижка</option>
+            </select>
+          </label>
+          <label>Дата<input name="date" type="date"></label>
+        </div>
+        <button class="btn btn-primary" type="submit">Отправить заявку</button>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
+      </div>
+      <div class="success" id="success"><h3>Заявка принята!</h3><p class="lead" style="margin:0 auto">Мы перезвоним в течение 10 минут.</p></div>
+    </form>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="container">
+    <span class="eyebrow">Контакты</span>
+    <h2>Как нас найти</h2>
+    <div class="contacts-grid">
+      <div class="contact-list">
+        <div><small>Адрес</small><b>ул. Тверская, 15, Москва</b></div>
+        <div><small>Телефон</small><b><a href="tel:+74950000000">+7 (495) 000-00-00</a></b></div>
+        <div><small>Режим работы</small><b>Ежедневно 10:00 — 22:00</b></div>
+        <div><small>Соцсети</small><b><a href="#">Telegram</a> · <a href="#">VK</a></b></div>
+      </div>
+      <div class="map"><iframe loading="lazy" title="Карта" src="https://yandex.ru/map-widget/v1/?ll=37.606%2C55.764&z=16"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container"><span>© 2026 BLADE Barbershop</span><span>Демо-проект для портфолио</span></div>
+</footer>
+
+<a href="#" class="float-cta" aria-label="Написать в Telegram">✈️</a>
+
+<script>
+  const header = document.getElementById('header');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40));
+
+  const menu = document.getElementById('menu');
+  document.getElementById('burger').onclick = () => menu.classList.toggle('open');
+  menu.querySelectorAll('a').forEach(a => a.onclick = () => menu.classList.remove('open'));
+
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // В реальном проекте здесь отправка заявки в Telegram-бота через backend
+  document.getElementById('form').onsubmit = e => {
+    e.preventDefault();
+    document.getElementById('formFields').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  };
+</script>
+</body>
+</html>

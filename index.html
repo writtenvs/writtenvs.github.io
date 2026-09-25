@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Портфолио — сайты и лендинги</title>
+<meta name="description" content="Портфолио веб-разработчика: лендинги, сайты-визитки, вёрстка.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #f6f6f3; --card: #fff; --text: #141414; --muted: #6b6b66; --line: #e6e5df; --accent: #2f6df6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .hero { padding: 88px 0 56px; }
+  .hero h1 { font-size: clamp(34px, 6vw, 58px); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 18px; }
+  .hero p { color: var(--muted); font-size: 18px; max-width: 580px; }
+  .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+  .skills span { background: var(--card); border: 1px solid var(--line); padding: 7px 14px; border-radius: 999px; font-size: 14px; font-weight: 500; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; padding-bottom: 88px; }
+  .work { background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; transition: .25s; display: flex; flex-direction: column; }
+  .work:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,.08); }
+  .thumb { aspect-ratio: 16/10; overflow: hidden; background: #ddd; position: relative; }
+  .thumb iframe { width: 1280px; height: 800px; border: 0; transform: scale(.27); transform-origin: 0 0; pointer-events: none; position: absolute; }
+  .work .body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+  .work h3 { font-size: 19px; margin-bottom: 6px; }
+  .work p { color: var(--muted); font-size: 14px; flex: 1; }
+  .work .go { margin-top: 16px; color: var(--accent); font-weight: 600; font-size: 14px; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 14px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .thumb iframe { transform: scale(.5); } }
+  @media (max-width: 520px) { .thumb iframe { transform: scale(.27); } }
+</style>
+</head>
+<body>
+  <section class="hero container">
+    <h1>Делаю сайты,<br>которые приводят клиентов</h1>
+    <p>Лендинги, сайты-визитки и вёрстка по макету. Адаптив под телефоны, быстрая загрузка, заявки прямо в Telegram.</p>
+    <div class="skills"><span>HTML / CSS / JS</span><span>Адаптивная вёрстка</span><span>Figma → код</span><span>Формы в Telegram</span><span>SEO-база</span></div>
+  </section>
+  <main class="container grid">
+    <a class="work" href="barbershop/"><div class="thumb"><iframe src="barbershop/" loading="lazy" tabindex="-1" title="Барбершоп"></iframe></div><div class="body"><h3>BLADE — барбершоп</h3><p>Лендинг с прайсом, мастерами, отзывами и онлайн-записью. Тёмный премиальный стиль.</p><span class="go">Открыть сайт →</span></div></a>
+    <a class="work" href="dental/"><div class="thumb"><iframe src="dental/" loading="lazy" tabindex="-1" title="Стоматология"></iframe></div><div class="body"><h3>Улыбка+ — стоматология</h3><p>Сайт клиники: услуги, врачи, FAQ и форма бесплатной консультации. Светлый чистый дизайн.</p><span class="go">Открыть сайт →</span></div></a>
+    <a class="work" href="course/"><div class="thumb"><iframe src="course/" loading="lazy" tabindex="-1" title="Онлайн-курс"></iframe></div><div class="body"><h3>BEATLAB — онлайн-курс</h3><p>Продающий лендинг курса: программа, тарифы, таймер скидки и форма записи.</p><span class="go">Открыть сайт →</span></div></a>
+  </main>
+  <footer><div class="container">© 2026 · Портфолио</div></footer>
+</body>
+</html>

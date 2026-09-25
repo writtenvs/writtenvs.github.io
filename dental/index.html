@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Улыбка+ — стоматология</title>
+<meta name="description" content="Стоматологическая клиника Улыбка+: лечение без боли, имплантация, отбеливание. Бесплатная консультация.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f2f7fb;
+    --text: #0f2233;
+    --muted: #5d7285;
+    --primary: #1f8fe5;
+    --primary-dark: #1673bb;
+    --accent: #20c4a8;
+    --line: #e3ebf2;
+    --radius: 20px;
+    --shadow: 0 12px 40px rgba(15, 34, 51, .08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Manrope, system-ui, sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 96px 0; }
+  h1, h2, h3 { line-height: 1.15; font-weight: 800; letter-spacing: -.02em; }
+  h2 { font-size: clamp(30px, 4.5vw, 44px); margin-bottom: 14px; }
+  .lead { color: var(--muted); font-size: 17px; max-width: 580px; }
+  .center { text-align: center; }
+  .center .lead { margin: 0 auto; }
+  .tag { display: inline-block; background: #e3f1fc; color: var(--primary); font-weight: 700; font-size: 13px; padding: 7px 14px; border-radius: 999px; margin-bottom: 16px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 30px; border-radius: 14px; font-weight: 700; font-size: 15px; border: 0; cursor: pointer; transition: .2s; font-family: inherit; }
+  .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 10px 24px rgba(31,143,229,.3); }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+  .btn-light { background: #fff; color: var(--text); border: 1px solid var(--line); }
+  .btn-light:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* top bar + header */
+  .topbar { background: var(--text); color: #c7d4df; font-size: 13px; }
+  .topbar .container { display: flex; justify-content: space-between; padding-top: 9px; padding-bottom: 9px; gap: 12px; flex-wrap: wrap; }
+  header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 20px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; }
+  .logo i { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: grid; place-items: center; color: #fff; font-style: normal; font-size: 20px; }
+  .menu { display: flex; gap: 30px; font-weight: 600; font-size: 15px; color: var(--muted); }
+  .menu a:hover { color: var(--primary); }
+  .phone { font-weight: 800; white-space: nowrap; }
+  .phone small { display: block; font-weight: 500; font-size: 12px; color: var(--muted); }
+  .burger { display: none; background: none; border: 0; font-size: 26px; cursor: pointer; color: var(--text); }
+
+  /* hero */
+  .hero { background: linear-gradient(180deg, var(--bg-soft), #fff); padding: 72px 0 96px; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(36px, 5.5vw, 60px); margin-bottom: 20px; }
+  .hero h1 span { color: var(--primary); }
+  .hero .lead { margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .checks { display: flex; gap: 22px; margin-top: 32px; flex-wrap: wrap; font-size: 14px; font-weight: 600; }
+  .checks span::before { content: "✓"; color: #fff; background: var(--accent); border-radius: 50%; width: 20px; height: 20px; display: inline-grid; place-items: center; font-size: 11px; margin-right: 8px; }
+  .hero-img { position: relative; }
+  .hero-img img { border-radius: 28px; aspect-ratio: 4/4.4; object-fit: cover; width: 100%; box-shadow: var(--shadow); }
+  .badge { position: absolute; background: #fff; border-radius: 16px; padding: 14px 18px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px; font-size: 13px; }
+  .badge b { font-size: 20px; display: block; line-height: 1.1; }
+  .badge.b1 { left: -28px; bottom: 40px; }
+  .badge.b2 { right: -16px; top: 36px; }
+  .badge .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; background: #e6f8f4; }
+
+  /* services */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 52px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; transition: .25s; }
+  .card:hover { box-shadow: var(--shadow); transform: translateY(-4px); border-color: transparent; }
+  .card .ic { width: 56px; height: 56px; border-radius: 16px; background: var(--bg-soft); display: grid; place-items: center; font-size: 26px; margin-bottom: 20px; }
+  .card h3 { font-size: 20px; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+  .card .price { font-weight: 800; color: var(--primary); }
+
+  /* promo */
+  .promo { background: linear-gradient(120deg, var(--primary), #1765b0); color: #fff; border-radius: 28px; padding: 56px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+  .promo h2 { color: #fff; }
+  .promo p { color: #d6e9fa; font-size: 17px; }
+  .promo form { display: grid; gap: 12px; }
+  .promo input { padding: 16px 18px; border-radius: 14px; border: 0; font: inherit; font-size: 15px; }
+  .promo .btn { background: var(--accent); color: #fff; }
+  .promo .btn:hover { background: #18a98f; }
+  .promo small { color: #b9d7f2; font-size: 12px; }
+
+  /* why */
+  .why { background: var(--bg-soft); }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 52px; }
+  .why-item b { font-size: 44px; color: var(--primary); display: block; line-height: 1; margin-bottom: 10px; font-weight: 800; }
+  .why-item p { color: var(--muted); font-size: 15px; }
+
+  /* doctors */
+  .grid-3.doctors { grid-template-columns: repeat(3, 1fr); }
+  .doctor { border-radius: var(--radius); overflow: hidden; background: var(--bg-soft); }
+  .doctor img { aspect-ratio: 1/1; object-fit: cover; width: 100%; }
+  .doctor div { padding: 22px; }
+  .doctor h3 { font-size: 19px; }
+  .doctor span { color: var(--muted); font-size: 14px; }
+
+  /* faq */
+  .faq { max-width: 820px; margin: 48px auto 0; display: grid; gap: 12px; }
+  details { border: 1px solid var(--line); border-radius: 16px; padding: 20px 24px; background: #fff; }
+  summary { font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::after { content: "+"; color: var(--primary); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { color: var(--muted); margin-top: 12px; font-size: 15px; }
+
+  footer { background: var(--text); color: #c7d4df; padding: 56px 0 32px; font-size: 14px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  footer h4 { color: #fff; margin-bottom: 12px; }
+  footer .logo { color: #fff; margin-bottom: 12px; }
+  .copy { border-top: 1px solid #22394d; padding-top: 24px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: #7f95a8; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 980px) {
+    .hero-grid, .promo, .foot-grid { grid-template-columns: 1fr; }
+    .grid-3, .grid-3.doctors { grid-template-columns: 1fr 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .menu { display: none; position: absolute; top: 76px; left: 0; right: 0; background: #fff; flex-direction: column; gap: 0; border-bottom: 1px solid var(--line); }
+    .menu.open { display: flex; }
+    .menu a { padding: 16px 20px; border-top: 1px solid var(--line); }
+    .burger { display: block; }
+    .phone { display: none; }
+    .badge.b1 { left: 12px; } .badge.b2 { right: 12px; }
+    .promo { padding: 36px 24px; }
+    section { padding: 72px 0; }
+  }
+  @media (max-width: 600px) {
+    .grid-3, .grid-3.doctors { grid-template-columns: 1fr; }
+    .topbar .hide-m { display: none; }
+    .hero-actions .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="container"><span>📍 Москва, Ленинский пр-т, 42</span><span class="hide-m">Ежедневно 9:00 — 21:00</span></div></div>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo"><i>🦷</i>Улыбка+</a>
+    <nav class="menu" id="menu">
+      <a href="#services">Услуги</a>
+      <a href="#doctors">Врачи</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="tel:+74950000000" class="phone">+7 (495) 000-00-00<small>звонок бесплатный</small></a>
+    <button class="burger" id="burger" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="tag">Лицензия № ЛО-77-01-000000</span>
+      <h1>Лечение зубов <span>без боли</span> и страха</h1>
+      <p class="lead">Современная клиника с цифровой диагностикой. Составим план лечения и зафиксируем цену до начала работы.</p>
+      <div class="hero-actions">
+        <a href="#promo" class="btn btn-primary">Бесплатная консультация</a>
+        <a href="#services" class="btn btn-light">Услуги и цены</a>
+      </div>
+      <div class="checks"><span>Гарантия до 10 лет</span><span>Рассрочка 0%</span><span>Налоговый вычет</span></div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=80" alt="Кабинет стоматологии">
+      <div class="badge b1"><div class="ic">⭐</div><div><b>4.9</b>на Яндекс Картах</div></div>
+      <div class="badge b2"><div class="ic">😊</div><div><b>15 000+</b>пациентов</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="center"><span class="tag">Услуги</span><h2>Всё для здоровья ваших зубов</h2><p class="lead">Полный цикл лечения в одной клинике — от профилактики до имплантации.</p></div>
+    <div class="grid-3">
+      <div class="card reveal"><div class="ic">🩺</div><h3>Лечение кариеса</h3><p>Современная анестезия и пломбы, неотличимые от родного зуба.</p><div class="price">от 3 500 ₽</div></div>
+      <div class="card reveal"><div class="ic">✨</div><h3>Отбеливание</h3><p>Зубы светлее на 8–10 тонов за один визит без вреда для эмали.</p><div class="price">от 12 000 ₽</div></div>
+      <div class="card reveal"><div class="ic">🔩</div><h3>Имплантация</h3><p>Импланты Straumann и Osstem с пожизненной гарантией производителя.</p><div class="price">от 35 000 ₽</div></div>
+      <div class="card reveal"><div class="ic">😁</div><h3>Брекеты и элайнеры</h3><p>Ровная улыбка для детей и взрослых. Незаметные системы.</p><div class="price">от 45 000 ₽</div></div>
+      <div class="card reveal"><div class="ic">🧼</div><h3>Проф. гигиена</h3><p>Ультразвук, Air Flow, полировка и фторирование за 1 час.</p><div class="price">от 4 500 ₽</div></div>
+      <div class="card reveal"><div class="ic">👶</div><h3>Детская стоматология</h3><p>Игровая зона, мультики и врачи, которых дети не боятся.</p><div class="price">от 2 500 ₽</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="promo" style="padding-top:0">
+  <div class="container">
+    <div class="promo reveal">
+      <div>
+        <h2>Консультация и 3D-снимок — бесплатно</h2>
+        <p>Оставьте телефон: администратор перезвонит, ответит на вопросы и подберёт удобное время.</p>
+      </div>
+      <form id="form">
+        <div id="fields" style="display:grid;gap:12px">
+          <input name="name" placeholder="Ваше имя" required>
+          <input name="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+          <button class="btn" type="submit">Записаться бесплатно</button>
+          <small>Нажимая кнопку, вы соглашаетесь на обработку персональных данных</small>
+        </div>
+        <div id="ok" style="display:none"><h3 style="font-size:24px">Спасибо! ✅</h3><p>Перезвоним в течение 15 минут.</p></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="container">
+    <div class="center"><span class="tag">Почему мы</span><h2>Нам доверяют с 2012 года</h2></div>
+    <div class="why-grid">
+      <div class="why-item reveal"><b>14</b><p>лет работаем и растём вместе с пациентами</p></div>
+      <div class="why-item reveal"><b>22</b><p>врача с опытом от 7 лет и регулярным обучением</p></div>
+      <div class="why-item reveal"><b>0 ₽</b><p>переплаты: цена фиксируется в договоре</p></div>
+      <div class="why-item reveal"><b>10 лет</b><p>гарантии на импланты и протезирование</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="doctors">
+  <div class="container">
+    <div class="center"><span class="tag">Врачи</span><h2>Наша команда</h2><p class="lead">Специалисты, которые умеют лечить бережно и объяснять понятно.</p></div>
+    <div class="grid-3 doctors">
+      <div class="doctor reveal"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80" alt="Врач"><div><h3>Иванов Сергей</h3><span>Главный врач, хирург-имплантолог · 18 лет</span></div></div>
+      <div class="doctor reveal"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80" alt="Врач"><div><h3>Петрова Анна</h3><span>Стоматолог-терапевт · 11 лет</span></div></div>
+      <div class="doctor reveal"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=600&q=80" alt="Врач"><div><h3>Ким Денис</h3><span>Ортодонт · 9 лет</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--bg-soft)">
+  <div class="container">
+    <div class="center"><span class="tag">Вопросы</span><h2>Частые вопросы</h2></div>
+    <div class="faq">
+      <details><summary>Будет ли больно?</summary><p>Нет. Мы используем современные анестетики и компьютерную анестезию — укол почти не чувствуется.</p></details>
+      <details><summary>Можно ли оплатить в рассрочку?</summary><p>Да, беспроцентная рассрочка до 12 месяцев без первого взноса.</p></details>
+      <details><summary>Как получить налоговый вычет?</summary><p>Мы подготовим все документы. Вы можете вернуть 13% от стоимости лечения.</p></details>
+      <details><summary>Сколько стоит консультация?</summary><p>Первичная консультация и 3D-снимок при записи через сайт — бесплатно.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer id="contacts">
+  <div class="container">
+    <div class="foot-grid">
+      <div><a href="#" class="logo"><i>🦷</i>Улыбка+</a><p>Стоматологическая клиника полного цикла. Лечим бережно и с гарантией.</p></div>
+      <div><h4>Контакты</h4><p>+7 (495) 000-00-00<br>info@ulybka-plus.ru<br>Ленинский пр-т, 42</p></div>
+      <div><h4>Режим работы</h4><p>Пн–Пт: 9:00 — 21:00<br>Сб–Вс: 10:00 — 19:00</p></div>
+    </div>
+    <div class="copy"><span>© 2026 Улыбка+</span><span>Демо-проект для портфолио</span></div>
+  </div>
+</footer>
+
+<script>
+  const menu = document.getElementById('menu');
+  document.getElementById('burger').onclick = () => menu.classList.toggle('open');
+  menu.querySelectorAll('a').forEach(a => a.onclick = () => menu.classList.remove('open'));
+
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  document.getElementById('form').onsubmit = e => {
+    e.preventDefault();
+    document.getElementById('fields').style.display = 'none';
+    document.getElementById('ok').style.display = 'block';
+  };
+</script>
+</body>
+</html>
