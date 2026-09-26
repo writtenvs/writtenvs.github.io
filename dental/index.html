@@ -259,7 +259,7 @@
 </footer>
 
 <script>
-  if (location.search.includes("shot")) { const s = document.createElement("style"); s.textContent = ".reveal{opacity:1!important;transform:none!important;transition:none!important}"; document.head.appendChild(s); }
+  if (location.search.includes("shot")) { const s = document.createElement("style"); s.textContent = ".reveal{opacity:1!important;transform:none!important;transition:none!important}"; document.head.appendChild(s); document.documentElement.style.scrollBehavior = "auto"; addEventListener("load", () => { if (location.hash) document.querySelector(location.hash)?.scrollIntoView(); }); }
   const menu = document.getElementById('menu');
   document.getElementById('burger').onclick = () => menu.classList.toggle('open');
   menu.querySelectorAll('a').forEach(a => a.onclick = () => menu.classList.remove('open'));
