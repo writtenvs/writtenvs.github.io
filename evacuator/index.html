@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Эвакуатор 24/7 — подача от 20 минут</title>
+<meta name="description" content="Эвакуатор 24/7: подача от 20 минут, фиксированная цена до выезда. Легковые, кроссоверы, межгород.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #141518; --bg-2: #1b1d21; --card: #22252a; --line: #30343a; --text: #f3f4f6; --muted: #9aa0a8; --accent: #ff7a1a; --accent-2: #ff9447; --radius: 18px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Manrope, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 88px 0; }
+  h1, h2, h3 { line-height: 1.12; letter-spacing: -.02em; }
+  h2 { font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; margin-bottom: 12px; }
+  h2 span { color: var(--accent); }
+  .lead { color: var(--muted); font-size: 17px; max-width: 560px; }
+  .tag { display: inline-block; color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 12px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 14px; font-weight: 700; font-size: 16px; border: 0; cursor: pointer; font-family: inherit; transition: .2s; }
+  .btn-accent { background: var(--accent); color: #111; box-shadow: 0 10px 30px rgba(255,122,26,.3); }
+  .btn-accent:hover { background: var(--accent-2); transform: translateY(-2px); }
+  .btn-ghost { border: 1.5px solid var(--line); color: var(--text); background: transparent; }
+  .btn-ghost:hover { border-color: var(--accent); }
+
+  header { position: sticky; top: 0; z-index: 30; background: rgba(20,21,24,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
+  .logo { font-weight: 800; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+  .logo i { font-style: normal; width: 38px; height: 38px; border-radius: 10px; background: var(--accent); color: #111; display: grid; place-items: center; font-size: 20px; }
+  .menu { display: flex; gap: 26px; color: var(--muted); font-size: 15px; font-weight: 600; }
+  .menu a:hover { color: var(--text); }
+  .phone { font-weight: 800; font-size: 18px; white-space: nowrap; }
+  .phone small { display: block; color: #4ade80; font-size: 12px; font-weight: 600; }
+
+  .hero { padding: 80px 0 90px; position: relative; overflow: hidden;
+    background: linear-gradient(90deg, rgba(20,21,24,.97) 35%, rgba(20,21,24,.6)), url("https://images.unsplash.com/photo-1600320254374-ce2d293c324e?w=1600&q=80") center/cover; }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  .live { display: inline-flex; align-items: center; gap: 8px; background: rgba(74,222,128,.12); color: #4ade80; font-weight: 700; font-size: 13px; padding: 7px 14px; border-radius: 999px; margin-bottom: 20px; }
+  .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 10px #4ade80; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 50% { opacity: .3; } }
+  .hero h1 { font-size: clamp(40px, 6.5vw, 72px); font-weight: 800; margin-bottom: 18px; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: #c4c8ce; font-size: 18px; max-width: 480px; margin-bottom: 30px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-facts { display: flex; gap: 36px; margin-top: 44px; flex-wrap: wrap; }
+  .hero-facts b { font-size: 30px; font-weight: 800; color: var(--accent); display: block; line-height: 1; }
+  .hero-facts span { color: var(--muted); font-size: 14px; }
+  .quick { background: rgba(34,37,42,.9); border: 1px solid var(--line); border-radius: 22px; padding: 28px; backdrop-filter: blur(6px); }
+  .quick h3 { font-size: 22px; margin-bottom: 6px; }
+  .quick p { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+
+  form { display: grid; gap: 12px; }
+  input, textarea { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 15px; resize: vertical; }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .note { color: var(--muted); font-size: 12px; text-align: center; }
+  .ok { display: none; text-align: center; padding: 30px 0; }
+  .ok h3 { color: var(--accent); font-size: 24px; margin-bottom: 6px; }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: .25s; }
+  .card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .card .ic { font-size: 32px; margin-bottom: 14px; }
+  .card h3 { font-size: 19px; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 15px; }
+
+  .prices { background: var(--bg-2); }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .price { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; position: relative; }
+  .price.hot { border: 2px solid var(--accent); }
+  .price.hot::before { content: "Чаще всего"; position: absolute; top: -13px; left: 26px; background: var(--accent); color: #111; font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 999px; }
+  .price h3 { font-size: 20px; margin-bottom: 6px; }
+  .price .sum { font-size: 38px; font-weight: 800; color: var(--accent); margin: 14px 0 6px; }
+  .price .sum small { font-size: 16px; color: var(--muted); font-weight: 600; }
+  .price ul { list-style: none; display: grid; gap: 8px; margin-top: 16px; color: #c4c8ce; font-size: 15px; }
+  .price li::before { content: "✓  "; color: var(--accent); font-weight: 800; }
+  .fix { margin-top: 22px; color: var(--muted); font-size: 14px; }
+
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .about img { width: 100%; border-radius: 22px; aspect-ratio: 4/3; object-fit: cover; }
+  .checks { display: grid; gap: 12px; margin-top: 24px; }
+  .checks div { display: flex; gap: 12px; align-items: flex-start; }
+  .checks i { font-style: normal; flex: 0 0 28px; height: 28px; border-radius: 8px; background: rgba(255,122,26,.15); color: var(--accent); display: grid; place-items: center; font-weight: 800; }
+
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; counter-reset: s; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; position: relative; }
+  .step::before { counter-increment: s; content: "0" counter(s); font-size: 40px; font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--accent); display: block; margin-bottom: 8px; }
+  .step h3 { font-size: 18px; margin-bottom: 6px; }
+  .step p { color: var(--muted); font-size: 14px; }
+
+  .adv { background: var(--bg-2); }
+  .adv-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 40px; }
+  .adv-item { text-align: center; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 14px; }
+  .adv-item .ic { font-size: 30px; margin-bottom: 10px; }
+  .adv-item b { display: block; font-size: 15px; }
+
+  .faq { max-width: 820px; margin: 40px auto 0; display: grid; gap: 10px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; }
+  summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::after { content: "+"; color: var(--accent); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { color: var(--muted); margin-top: 10px; font-size: 15px; }
+
+  .order { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; }
+  .order form { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 30px; }
+  .contacts { display: grid; gap: 16px; margin-top: 26px; }
+  .contacts small { color: var(--muted); display: block; font-size: 13px; }
+  .contacts b { font-size: 18px; }
+  .msg { display: flex; gap: 10px; margin-top: 6px; }
+  .msg a { padding: 10px 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); font-weight: 700; font-size: 14px; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 13px; }
+  footer .container { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  .call-fab { display: none; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 40; }
+  .call-fab .btn { width: 100%; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 980px) {
+    .hero-grid, .about, .order { grid-template-columns: 1fr; }
+    .grid-3, .price-grid { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .adv-grid { grid-template-columns: repeat(3, 1fr); }
+    .menu { display: none; }
+    section { padding: 68px 0; }
+  }
+  @media (max-width: 620px) {
+    .grid-3, .price-grid, .steps { grid-template-columns: 1fr; }
+    .adv-grid { grid-template-columns: 1fr 1fr; }
+    .row { grid-template-columns: 1fr; }
+    .phone { font-size: 15px; }
+    .hero-actions .btn { width: 100%; }
+    .call-fab { display: block; }
+    body { padding-bottom: 84px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="#" class="logo"><i>🚚</i>ЭвакоПро</a>
+    <nav class="menu"><a href="#services">Услуги</a><a href="#prices">Цены</a><a href="#how">Как работаем</a><a href="#faq">Вопросы</a><a href="#order">Контакты</a></nav>
+    <a href="tel:+79000000000" class="phone">+7 (900) 000-00-00<small>● Работаем круглосуточно</small></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="live">Свободно 4 эвакуатора рядом с вами</span>
+      <h1>Эвакуатор 24/7<br>подача <span>от 20 минут</span></h1>
+      <p>Приедем после поломки или ДТП, аккуратно погрузим и доставим автомобиль. Цену называем до выезда — она не меняется.</p>
+      <div class="hero-actions">
+        <a href="tel:+79000000000" class="btn btn-accent">📞 Вызвать эвакуатор</a>
+        <a href="#prices" class="btn btn-ghost">Узнать цены</a>
+      </div>
+      <div class="hero-facts">
+        <div><b>20 мин</b><span>средняя подача</span></div>
+        <div><b>24/7</b><span>без выходных</span></div>
+        <div><b>от 1 500 ₽</b><span>фиксированная цена</span></div>
+      </div>
+    </div>
+    <div class="quick reveal">
+      <h3>Рассчитаем стоимость за 2 минуты</h3>
+      <p>Оставьте номер — перезвоним и назовём точную цену</p>
+      <form class="js-form">
+        <div class="fields" style="display:grid;gap:12px">
+          <input required placeholder="Ваше имя">
+          <input required type="tel" placeholder="+7 (___) ___-__-__">
+          <button class="btn btn-accent" type="submit">Получить расчёт</button>
+          <p class="note">Перезваниваем в течение 3 минут</p>
+        </div>
+        <div class="ok"><h3>Заявка принята!</h3><p class="lead" style="margin:0 auto">Диспетчер уже звонит вам.</p></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <span class="tag">Услуги</span>
+    <h2>Эвакуируем <span>в любой ситуации</span></h2>
+    <p class="lead">Собственный парк эвакуаторов с ломаной и сдвижной платформой.</p>
+    <div class="grid-3">
+      <div class="card reveal"><div class="ic">🔧</div><h3>После поломки</h3><p>Не заводится, заглох на трассе, сел аккумулятор — отвезём в сервис или домой.</p></div>
+      <div class="card reveal"><div class="ic">💥</div><h3>После ДТП</h3><p>Аккуратно погрузим повреждённый автомобиль, поможем с документами для страховой.</p></div>
+      <div class="card reveal"><div class="ic">🚗</div><h3>Перевозка авто</h3><p>Доставка из салона, на стоянку, на тюнинг или к новому владельцу.</p></div>
+      <div class="card reveal"><div class="ic">🚙</div><h3>Внедорожники</h3><p>Большие кроссоверы и внедорожники до 3,5 тонн — на усиленной платформе.</p></div>
+      <div class="card reveal"><div class="ic">🛣️</div><h3>Межгород</h3><p>Перевезём автомобиль в другой город по фиксированной цене за километр.</p></div>
+      <div class="card reveal"><div class="ic">⚙️</div><h3>Сложная погрузка</h3><p>Заблокированные колёса, низкая посадка, паркинг — используем подкатные тележки.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="prices" id="prices">
+  <div class="container">
+    <span class="tag">Цены</span>
+    <h2>Понятные тарифы <span>без доплат</span></h2>
+    <p class="lead">Итоговую стоимость назовём по телефону до выезда — она зафиксирована.</p>
+    <div class="price-grid">
+      <div class="price reveal"><h3>Легковой</h3><div class="sum">от 1 500 <small>₽</small></div><p class="lead" style="font-size:14px">по городу</p><ul><li>Подача от 20 минут</li><li>Погрузка включена</li><li>До 10 км по городу</li></ul></div>
+      <div class="price hot reveal"><h3>Кроссовер / внедорожник</h3><div class="sum">от 2 000 <small>₽</small></div><p class="lead" style="font-size:14px">по городу</p><ul><li>Усиленная платформа</li><li>Погрузка включена</li><li>До 10 км по городу</li></ul></div>
+      <div class="price reveal"><h3>Межгород</h3><div class="sum">от 40 <small>₽/км</small></div><p class="lead" style="font-size:14px">за пределами города</p><ul><li>Фиксированная цена</li><li>Страховка груза</li><li>Любые расстояния</li></ul></div>
+    </div>
+    <p class="fix">* Цена не меняется после приезда эвакуатора. Никаких скрытых доплат за ожидание и погрузку.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container about">
+    <img class="reveal" src="https://images.unsplash.com/photo-1606577924006-27d39b132ae2?w=900&q=80" alt="Эвакуатор">
+    <div class="reveal">
+      <span class="tag">О компании</span>
+      <h2>Работаем <span>с 2015 года</span></h2>
+      <p class="lead">Более 20 000 выполненных эвакуаций. Водители с опытом от 5 лет знают, как бережно погрузить любой автомобиль.</p>
+      <div class="checks">
+        <div><i>✓</i><span>Круглосуточно, без выходных и праздников</span></div>
+        <div><i>✓</i><span>Аккуратная погрузка на мягкие ремни, без царапин</span></div>
+        <div><i>✓</i><span>Фиксированная стоимость называется до выезда</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="padding-top:0">
+  <div class="container">
+    <span class="tag">Как проходит работа</span>
+    <h2>4 простых <span>шага</span></h2>
+    <div class="steps">
+      <div class="step reveal"><h3>Заявка</h3><p>Звоните или оставляете заявку на сайте — отвечаем за 1 минуту.</p></div>
+      <div class="step reveal"><h3>Расчёт</h3><p>Называем точную стоимость и время подачи. Цена фиксируется.</p></div>
+      <div class="step reveal"><h3>Выезд</h3><p>Ближайший эвакуатор выезжает к вам, водитель звонит заранее.</p></div>
+      <div class="step reveal"><h3>Доставка</h3><p>Аккуратно грузим и доставляем автомобиль по нужному адресу.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="adv">
+  <div class="container">
+    <div style="text-align:center"><span class="tag">Преимущества</span><h2>Почему выбирают <span>нас</span></h2></div>
+    <div class="adv-grid">
+      <div class="adv-item reveal"><div class="ic">⚡</div><b>Быстрая подача</b></div>
+      <div class="adv-item reveal"><div class="ic">🌙</div><b>Работа 24/7</b></div>
+      <div class="adv-item reveal"><div class="ic">👨‍✈️</div><b>Опытные водители</b></div>
+      <div class="adv-item reveal"><div class="ic">🚛</div><b>Своя техника</b></div>
+      <div class="adv-item reveal"><div class="ic">💰</div><b>Без скрытых доплат</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div style="text-align:center"><span class="tag">FAQ</span><h2>Частые <span>вопросы</span></h2></div>
+    <div class="faq">
+      <details><summary>Сколько ждать эвакуатор?</summary><p>В среднем 20–30 минут по городу. Точное время диспетчер назовёт при звонке.</p></details>
+      <details><summary>Может ли измениться цена после приезда?</summary><p>Нет. Стоимость фиксируется при заказе и не меняется, если вы указали данные об автомобиле верно.</p></details>
+      <details><summary>Что делать, если колёса заблокированы?</summary><p>Используем подкатные колёсные тележки — погрузим автомобиль даже с заблокированными колёсами или АКПП.</p></details>
+      <details><summary>Можно оплатить картой?</summary><p>Да: картой, наличными, по СБП или переводом. Для юрлиц — по безналу с документами.</p></details>
+      <details><summary>Работаете ли вы ночью и в праздники?</summary><p>Да, круглосуточно и без выходных, по одной цене в любое время.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="order" class="prices">
+  <div class="container order">
+    <div class="reveal">
+      <span class="tag">Контакты</span>
+      <h2>Вызовите эвакуатор <span>прямо сейчас</span></h2>
+      <p class="lead">Позвоните, напишите в мессенджер или оставьте заявку — перезвоним в течение 3 минут.</p>
+      <div class="contacts">
+        <div><small>Телефон</small><b><a href="tel:+79000000000">+7 (900) 000-00-00</a></b></div>
+        <div><small>Режим работы</small><b>Круглосуточно, без выходных</b></div>
+        <div><small>Мессенджеры</small><div class="msg"><a href="#">Telegram</a><a href="#">WhatsApp</a><a href="#">MAX</a></div></div>
+      </div>
+    </div>
+    <form class="js-form reveal">
+      <div class="fields" style="display:grid;gap:12px">
+        <div class="row"><input required placeholder="Имя"><input required type="tel" placeholder="Телефон"></div>
+        <input required placeholder="Откуда забрать автомобиль">
+        <input placeholder="Куда доставить">
+        <textarea rows="3" placeholder="Кратко опишите ситуацию: марка авто, что случилось"></textarea>
+        <button class="btn btn-accent" type="submit">Отправить заявку</button>
+        <p class="note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+      </div>
+      <div class="ok"><h3>Заявка принята!</h3><p class="lead" style="margin:0 auto">Диспетчер перезвонит в течение 3 минут.</p></div>
+    </form>
+  </div>
+</section>
+
+<footer><div class="container"><span>© 2026 ЭвакоПро — эвакуатор 24/7</span><span>Демо-проект для портфолио</span></div></footer>
+
+<div class="call-fab"><a href="tel:+79000000000" class="btn btn-accent">📞 Позвонить диспетчеру</a></div>
+
+<script>
+  if (location.search.includes("shot")) { const s = document.createElement("style"); s.textContent = ".reveal{opacity:1!important;transform:none!important;transition:none!important}"; document.head.appendChild(s); document.documentElement.style.scrollBehavior = "auto"; addEventListener("load", () => { if (location.hash) document.querySelector(location.hash)?.scrollIntoView(); }); }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.js-form').forEach(f => f.onsubmit = e => {
+    e.preventDefault();
+    f.querySelector('.fields').style.display = 'none';
+    f.querySelector('.ok').style.display = 'block';
+  });
+</script>
+</body>
+</html>
