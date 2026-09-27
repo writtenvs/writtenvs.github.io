@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бутон — доставка цветов в Казани</title>
+<meta name="description" content="Свежие букеты с доставкой по Казани за 2 часа. Фото букета перед отправкой, открытка в подарок.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #fbf7f4; --card: #fff; --text: #2a2024; --muted: #85777c; --line: #eee3de; --accent: #d9486f; --accent-2: #3f6b4f; --soft: #f7e6ea; --radius: 20px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+  a { color: inherit; text-decoration: none; }
+  button, input, textarea, select { font: inherit; }
+  button { cursor: pointer; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .serif { font-family: "Playfair Display", Georgia, serif; }
+
+  .promo { background: var(--accent-2); color: #fff; text-align: center; font-size: 13px; padding: 9px 12px; }
+  header { position: sticky; top: 0; z-index: 30; background: rgba(251,247,244,.93); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
+  .logo { font-family: "Playfair Display", serif; font-weight: 700; font-size: 28px; }
+  .logo span { color: var(--accent); }
+  .menu { display: flex; gap: 28px; font-size: 15px; font-weight: 500; }
+  .menu a:hover { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .phone { font-weight: 700; font-size: 15px; }
+  .cart-btn { background: var(--text); color: #fff; border: 0; border-radius: 999px; padding: 11px 18px; font-weight: 600; font-size: 14px; display: flex; gap: 8px; align-items: center; }
+  .cart-btn b { background: var(--accent); border-radius: 999px; min-width: 22px; height: 22px; display: grid; place-items: center; font-size: 12px; padding: 0 6px; }
+
+  .hero { padding: 40px 0 24px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+  .hero small { color: var(--accent); font-weight: 700; letter-spacing: .14em; font-size: 13px; }
+  .hero h1 { font-family: "Playfair Display", serif; font-size: clamp(40px, 5.6vw, 70px); line-height: 1.04; margin: 14px 0 18px; }
+  .hero h1 i { color: var(--accent); }
+  .hero p { color: var(--muted); font-size: 18px; max-width: 470px; margin-bottom: 30px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; padding: 16px 28px; font-weight: 700; font-size: 15px; transition: .2s; }
+  .btn-accent { background: var(--accent); color: #fff; }
+  .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(217,72,111,.3); }
+  .btn-line { border: 1.5px solid var(--text); background: transparent; }
+  .hero-stats { display: flex; gap: 34px; margin-top: 36px; }
+  .hero-stats b { display: block; font-size: 26px; font-weight: 800; }
+  .hero-stats span { color: var(--muted); font-size: 14px; }
+  .hero-img { position: relative; border-radius: 200px 200px 28px 28px; overflow: hidden; aspect-ratio: 4/4.6; background: var(--soft); }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-tag { position: absolute; left: 20px; bottom: 20px; background: #fff; border-radius: 16px; padding: 14px 18px; box-shadow: 0 16px 36px rgba(0,0,0,.12); font-size: 14px; }
+  .hero-tag b { display: block; font-size: 16px; }
+
+  .perks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
+  .perk { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px; font-size: 14px; display: flex; gap: 12px; align-items: center; }
+  .perk i { font-style: normal; font-size: 24px; width: 46px; height: 46px; border-radius: 12px; background: var(--soft); display: grid; place-items: center; flex: none; }
+  .perk b { display: block; font-size: 15px; }
+  .perk span { color: var(--muted); font-size: 13px; }
+
+  section { scroll-margin-top: 80px; }
+  .sec { padding: 70px 0; }
+  .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
+  .sec-head h2 { font-family: "Playfair Display", serif; font-size: clamp(32px, 4vw, 44px); line-height: 1.1; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 500; }
+  .chip.active { background: var(--text); color: #fff; border-color: var(--text); }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .product { background: var(--card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; transition: .25s; }
+  .product:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(90,40,50,.1); }
+  .product .img { aspect-ratio: 1/1.1; position: relative; overflow: hidden; background: var(--soft); }
+  .product .img img { width: 100%; height: 100%; object-fit: cover; transition: .5s; }
+  .product:hover .img img { transform: scale(1.05); }
+  .badge { position: absolute; top: 12px; left: 12px; background: #fff; color: var(--accent); font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; }
+  .product .body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+  .product h3 { font-size: 17px; font-weight: 700; }
+  .product p { color: var(--muted); font-size: 13px; margin: 4px 0 14px; }
+  .buy { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .price { font-weight: 800; font-size: 19px; }
+  .add { background: var(--soft); color: var(--accent); border: 0; border-radius: 12px; padding: 10px 14px; font-weight: 700; font-size: 14px; transition: .2s; }
+  .add:hover { background: var(--accent); color: #fff; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .step { background: #fff; border-radius: var(--radius); padding: 28px; border: 1px solid var(--line); }
+  .step b { font-family: "Playfair Display", serif; font-size: 40px; color: var(--accent); }
+  .step h3 { font-size: 19px; margin: 6px 0 8px; }
+  .step p { color: var(--muted); font-size: 15px; }
+
+  .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .review { background: #fff; border-radius: var(--radius); padding: 26px; border: 1px solid var(--line); }
+  .review .stars { color: #f4a93b; letter-spacing: 2px; }
+  .review p { margin: 12px 0 16px; font-size: 15px; }
+  .review span { color: var(--muted); font-size: 14px; }
+
+  .contact { background: var(--accent-2); color: #fff; border-radius: 28px; padding: 50px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+  .contact h2 { font-family: "Playfair Display", serif; font-size: clamp(30px, 3.8vw, 42px); line-height: 1.1; margin-bottom: 14px; }
+  .contact p { opacity: .85; margin-bottom: 22px; }
+  .contact ul { list-style: none; display: grid; gap: 10px; font-size: 16px; }
+  .contact form { background: #fff; color: var(--text); border-radius: 20px; padding: 26px; display: grid; gap: 12px; }
+  .contact form h3 { font-size: 20px; }
+  input, textarea, select { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: #fff; font-size: 15px; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); }
+  .ok { display: none; background: #e8f4ec; color: var(--accent-2); padding: 12px 14px; border-radius: 12px; font-weight: 600; font-size: 14px; }
+
+  footer { padding: 34px 0; color: var(--muted); font-size: 14px; }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  .overlay { position: fixed; inset: 0; background: rgba(40,20,25,.4); opacity: 0; pointer-events: none; transition: .3s; z-index: 40; }
+  .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: #fff; z-index: 50; transform: translateX(100%); transition: .35s; display: flex; flex-direction: column; }
+  .open .overlay { opacity: 1; pointer-events: auto; }
+  .open .drawer { transform: none; }
+  .drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 20px 22px; border-bottom: 1px solid var(--line); }
+  .drawer-head h3 { font-size: 22px; font-weight: 800; }
+  .close { background: none; border: 0; font-size: 28px; line-height: 1; }
+  .drawer-body { flex: 1; overflow: auto; padding: 6px 22px 20px; }
+  .item { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: center; }
+  .item img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; }
+  .item h4 { font-size: 14px; }
+  .qty { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 14px; }
+  .qty button { width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+  .item .p { font-weight: 700; }
+  .order { display: grid; gap: 10px; margin-top: 18px; }
+  .order h4 { font-size: 16px; margin-top: 4px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .drawer-foot { padding: 18px 22px; border-top: 1px solid var(--line); display: grid; gap: 12px; }
+  .total { display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; }
+  .drawer-foot small { color: var(--muted); font-size: 12px; text-align: center; }
+  .empty-cart { text-align: center; color: var(--muted); padding: 60px 0; }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 120px); background: var(--text); color: #fff; padding: 14px 22px; border-radius: 14px; font-size: 14px; font-weight: 600; transition: .35s; z-index: 60; }
+  .toast.show { transform: translate(-50%, 0); }
+
+  .wa-float { position: fixed; right: 20px; bottom: 20px; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; font-size: 28px; box-shadow: 0 10px 26px rgba(37,211,102,.45); z-index: 20; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: .7s; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 1000px) {
+    .menu { display: none; }
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .perks { grid-template-columns: repeat(2, 1fr); }
+    .hero-grid, .contact { grid-template-columns: 1fr; }
+    .hero-img { max-width: 520px; }
+    .steps, .reviews { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .phone { display: none; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .product .body { padding: 12px; }
+    .product h3 { font-size: 15px; }
+    .buy { flex-direction: column; align-items: stretch; }
+    .perks { grid-template-columns: 1fr; }
+    .hero-stats { gap: 22px; }
+    .contact { padding: 28px 20px; }
+    .sec { padding: 50px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="promo">🚚 Доставка по Казани за 2 часа · Открытка в подарок к каждому букету</div>
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">Бут<span>о</span>н</a>
+    <nav class="menu">
+      <a href="#catalog">Каталог</a>
+      <a href="#how">Как заказать</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="nav-right">
+      <a href="tel:+79000000000" class="phone">+7 900 000-00-00</a>
+      <button class="cart-btn" id="cartBtn">Корзина <b id="count">0</b></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <div class="hero-grid">
+    <div>
+      <small>ЦВЕТОЧНАЯ МАСТЕРСКАЯ · КАЗАНЬ</small>
+      <h1>Букеты, которые <i>дарят</i> настроение</h1>
+      <p>Собираем из свежих цветов в день заказа. Перед доставкой пришлём фото букета, чтобы вы точно знали, что получит близкий человек.</p>
+      <div class="hero-btns">
+        <a href="#catalog" class="btn btn-accent">Выбрать букет</a>
+        <a href="https://wa.me/79000000000" class="btn btn-line">Написать в WhatsApp</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>2 часа</b><span>доставка по городу</span></div>
+        <div><b>4.9 ★</b><span>рейтинг в 2ГИС</span></div>
+        <div><b>от 1 900 ₽</b><span>цена букета</span></div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1596438459194-f275f413d6ff?w=1000&q=80" alt="Букет роз">
+      <div class="hero-tag"><b>Фото перед доставкой</b>пришлём в WhatsApp 📸</div>
+    </div>
+  </div>
+  <div class="perks">
+    <div class="perk"><i>🌷</i><div><b>Свежие цветы</b><span>поставки каждый день</span></div></div>
+    <div class="perk"><i>🚚</i><div><b>Доставка за 2 часа</b><span>по всей Казани</span></div></div>
+    <div class="perk"><i>📸</i><div><b>Фото букета</b><span>до отправки курьеру</span></div></div>
+    <div class="perk"><i>💌</i><div><b>Открытка бесплатно</b><span>напишем ваш текст</span></div></div>
+  </div>
+</section>
+
+<section class="sec container" id="catalog">
+  <div class="sec-head">
+    <h2>Каталог букетов</h2>
+    <div class="filters" id="filters">
+      <button class="chip active" data-cat="all">Все</button>
+      <button class="chip" data-cat="roses">Розы</button>
+      <button class="chip" data-cat="author">Авторские</button>
+      <button class="chip" data-cat="spring">Тюльпаны и пионы</button>
+      <button class="chip" data-cat="mini">До 3 000 ₽</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="sec container" id="how">
+  <div class="sec-head"><h2>Как заказать</h2></div>
+  <div class="steps">
+    <div class="step reveal"><b>01</b><h3>Выберите букет</h3><p>В каталоге или пришлите фото, соберём похожий под ваш бюджет.</p></div>
+    <div class="step reveal"><b>02</b><h3>Оформите заказ</h3><p>Адрес, время и текст открытки. Заказ сразу придёт нам в WhatsApp.</p></div>
+    <div class="step reveal"><b>03</b><h3>Получите фото</h3><p>Пришлём фото готового букета и доставим к нужному времени.</p></div>
+  </div>
+</section>
+
+<section class="sec container" id="reviews">
+  <div class="sec-head"><h2>Отзывы</h2></div>
+  <div class="reviews">
+    <div class="review reveal"><div class="stars">★★★★★</div><p>Заказывал маме на день рождения, привезли ровно ко времени. Букет даже лучше, чем на фото.</p><span>Артём, 2ГИС</span></div>
+    <div class="review reveal"><div class="stars">★★★★★</div><p>Очень свежие пионы, стояли больше недели. Приятно, что прислали фото перед отправкой.</p><span>Алсу, 2ГИС</span></div>
+    <div class="review reveal"><div class="stars">★★★★★</div><p>Оформила заказ за пару минут с телефона, ответили сразу. Теперь только к вам.</p><span>Екатерина, 2ГИС</span></div>
+  </div>
+</section>
+
+<section class="sec container" id="contacts">
+  <div class="contact">
+    <div>
+      <h2>Не знаете, что выбрать?</h2>
+      <p>Скажите повод и бюджет, флорист подберёт букет и пришлёт варианты.</p>
+      <ul>
+        <li>📍 Казань, ул. Примерная, 1</li>
+        <li>🕘 Ежедневно 8:00–22:00</li>
+        <li>📞 +7 900 000-00-00</li>
+      </ul>
+    </div>
+    <form id="helpForm">
+      <h3>Подобрать букет</h3>
+      <input name="name" placeholder="Ваше имя" required>
+      <input name="phone" type="tel" placeholder="Телефон" required>
+      <input name="budget" placeholder="Повод и бюджет, например «мама, до 4 000 ₽»">
+      <button class="btn btn-accent" type="submit">Жду варианты</button>
+      <div class="ok" id="helpOk">Спасибо! Флорист напишет вам в течение 10 минут 🌸</div>
+    </form>
+  </div>
+</section>
+
+<footer><div class="container"><span>© Бутон, доставка цветов в Казани</span><span>Демо-сайт · заказы уходят в WhatsApp</span></div></footer>
+
+<a class="wa-float" href="https://wa.me/79000000000" aria-label="WhatsApp">💬</a>
+
+<div id="cartRoot">
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer">
+    <div class="drawer-head"><h3>Ваш заказ</h3><button class="close" id="close" aria-label="Закрыть">×</button></div>
+    <div class="drawer-body">
+      <div id="items"></div>
+      <form class="order" id="orderForm">
+        <h4>Доставка</h4>
+        <input name="name" placeholder="Ваше имя" required>
+        <input name="phone" type="tel" placeholder="Ваш телефон" required>
+        <input name="address" placeholder="Адрес получателя" required>
+        <div class="row2">
+          <input name="date" type="date" required>
+          <select name="time"><option>9:00–12:00</option><option>12:00–15:00</option><option>15:00–18:00</option><option>18:00–21:00</option></select>
+        </div>
+        <textarea name="card" rows="2" placeholder="Текст открытки (бесплатно)"></textarea>
+      </form>
+    </div>
+    <div class="drawer-foot">
+      <div class="total"><span>Итого</span><span id="total">0 ₽</span></div>
+      <button class="btn btn-accent" id="checkout">Отправить заказ в WhatsApp</button>
+      <small>Оплата после подтверждения заказа флористом</small>
+    </div>
+  </aside>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+  const WA = '79000000000';
+  const products = [
+    { id: 1, name: 'Нежность', desc: 'Кустовые розы, эустома, эвкалипт', cat: 'author', price: 3900, badge: 'Хит', img: 'photo-1596438459194-f275f413d6ff' },
+    { id: 2, name: 'Тюльпаны 15 шт', desc: 'Пионовидные тюльпаны, лента', cat: 'spring mini', price: 2900, img: 'photo-1561181286-d3fee7d55364' },
+    { id: 3, name: 'Пионы 9 шт', desc: 'Розовые пионы Сара Бернар', cat: 'spring', price: 6900, badge: 'Сезон', img: 'photo-1582794543139-8ac9cb0f7b11' },
+    { id: 4, name: 'Белое облако', desc: 'Белые розы и гортензия в крафте', cat: 'roses', price: 4500, img: 'photo-1523694576729-dc99e9c0f9b4' },
+    { id: 5, name: 'Прованс', desc: 'Авторский микс с лавандой', cat: 'author', price: 4900, img: 'photo-1487530811176-3780de880c2d' },
+    { id: 6, name: 'Солнечный', desc: 'Мини-букет с подсолнухом', cat: 'mini author', price: 1900, img: 'photo-1567696153798-9111f9cd3d0d' },
+    { id: 7, name: 'Розы в вазе', desc: 'Пионовидные розы, 11 шт', cat: 'roses', price: 5900, img: 'photo-1591886960571-74d43a9d4166' },
+    { id: 8, name: 'Яркий акцент', desc: 'Розы, львиный зев, тюльпаны', cat: 'author', price: 3500, img: 'photo-1533616688419-b7a585564566' }
+  ];
+  const fmt = n => n.toLocaleString('ru-RU') + ' ₽';
+  const state = { cat: 'all', cart: [] };
+  try { state.cart = JSON.parse(localStorage.getItem('buton-cart')) || []; } catch (e) {}
+
+  const grid = document.getElementById('grid');
+  function render() {
+    const list = products.filter(p => state.cat === 'all' || p.cat.split(' ').includes(state.cat));
+    grid.innerHTML = list.map(p => `
+      <article class="product">
+        <div class="img">${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+          <img src="https://images.unsplash.com/${p.img}?w=600&h=660&fit=crop&q=80" alt="${p.name}" loading="lazy"></div>
+        <div class="body">
+          <h3>${p.name}</h3><p>${p.desc}</p>
+          <div class="buy"><span class="price">${fmt(p.price)}</span>
+          <button class="add" data-add="${p.id}">В корзину</button></div>
+        </div>
+      </article>`).join('');
+  }
+
+  function saveCart() {
+    try { localStorage.setItem('buton-cart', JSON.stringify(state.cart)); } catch (e) {}
+    document.getElementById('count').textContent = state.cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('items').innerHTML = state.cart.length ? state.cart.map((i, idx) => {
+      const p = products.find(x => x.id === i.id);
+      return `<div class="item"><img src="https://images.unsplash.com/${p.img}?w=160&h=160&fit=crop&q=70" alt="">
+        <div><h4>${p.name}</h4>
+        <div class="qty"><button data-dec="${idx}">−</button>${i.qty}<button data-inc="${idx}">+</button></div></div>
+        <span class="p">${fmt(p.price * i.qty)}</span></div>`;
+    }).join('') : '<p class="empty-cart">Корзина пуста 🌸</p>';
+    document.getElementById('total').textContent = fmt(cartSum());
+  }
+  const cartSum = () => state.cart.reduce((s, i) => s + products.find(p => p.id === i.id).price * i.qty, 0);
+
+  function toast(text) {
+    const t = document.getElementById('toast');
+    t.textContent = text; t.classList.add('show');
+    clearTimeout(t.timer); t.timer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  grid.addEventListener('click', e => {
+    const id = +e.target.dataset.add;
+    if (!id) return;
+    const ex = state.cart.find(i => i.id === id);
+    ex ? ex.qty++ : state.cart.push({ id, qty: 1 });
+    saveCart(); toast('Букет в корзине ✓');
+  });
+  document.getElementById('items').addEventListener('click', e => {
+    const { inc, dec } = e.target.dataset;
+    if (inc !== undefined) state.cart[inc].qty++;
+    if (dec !== undefined && --state.cart[dec].qty === 0) state.cart.splice(dec, 1);
+    saveCart();
+  });
+  document.getElementById('filters').addEventListener('click', e => {
+    if (!e.target.dataset.cat) return;
+    document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === e.target));
+    state.cat = e.target.dataset.cat; render();
+  });
+
+  const root = document.getElementById('cartRoot');
+  document.getElementById('cartBtn').onclick = () => root.classList.add('open');
+  document.getElementById('close').onclick = document.getElementById('overlay').onclick = () => root.classList.remove('open');
+  document.getElementById('checkout').onclick = () => {
+    if (!state.cart.length) return toast('Добавьте букет в корзину');
+    const f = document.getElementById('orderForm');
+    if (!f.reportValidity()) return;
+    const d = Object.fromEntries(new FormData(f));
+    const lines = state.cart.map(i => { const p = products.find(x => x.id === i.id); return `• ${p.name} × ${i.qty} = ${fmt(p.price * i.qty)}`; });
+    const text = [`Заказ с сайта`, ...lines, `Итого: ${fmt(cartSum())}`, ``, `Имя: ${d.name}`, `Телефон: ${d.phone}`, `Адрес: ${d.address}`, `Когда: ${d.date}, ${d.time}`, d.card ? `Открытка: ${d.card}` : ''].filter(Boolean).join('\n');
+    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(text), '_blank');
+    state.cart = []; saveCart(); f.reset(); root.classList.remove('open'); toast('Заказ отправлен! Скоро пришлём фото букета 🌸');
+  };
+  document.getElementById('helpForm').onsubmit = e => {
+    e.preventDefault(); e.target.reset(); document.getElementById('helpOk').style.display = 'block';
+  };
+
+  const shot = location.search.includes('shot');
+  if (shot) {
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    addEventListener('load', () => { if (location.hash) document.querySelector(location.hash)?.scrollIntoView(); });
+  } else {
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  render(); saveCart();
+</script>
+</body>
+</html>
