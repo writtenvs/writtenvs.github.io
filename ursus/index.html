@@ -132,6 +132,7 @@
   #map { min-height: 520px; z-index: 1; }
   .pin { width: 34px; height: 34px; border-radius: 50% 50% 50% 0; background: var(--accent); transform: rotate(-45deg); border: 3px solid #fff; box-shadow: 0 6px 14px rgba(0,0,0,.3); }
   .pin.main { background: #f4b740; }
+  .leaflet-tile-pane { filter: saturate(.55) contrast(.95) brightness(1.03); }
   .leaflet-popup-content { font-family: Manrope, sans-serif; font-size: 14px; }
 
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 34px; counter-reset: s; }
@@ -471,7 +472,7 @@
   document.getElementById('toApp').onclick = e => { e.preventDefault(); document.querySelector('.app').scrollIntoView({ behavior: 'smooth' }); };
   if (window.L) {
     const map = L.map('map', { scrollWheelZoom: false }).setView([55.815, 49.09], 11);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: '&copy; OpenStreetMap, &copy; CARTO', maxZoom: 19 }).addTo(map);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap', maxZoom: 19 }).addTo(map);
     const markers = points.map(p => L.marker(p.c, { icon: L.divIcon({ className: '', html: `<div class="pin${p.main ? ' main' : ''}"></div>`, iconSize: [34, 34], iconAnchor: [17, 34], popupAnchor: [0, -30] }) })
       .addTo(map).bindPopup(`<b>${p.n}</b><br>${p.d}<br><span style="color:#0e8f86">${p.h}</span>`));
     map.fitBounds(L.latLngBounds(points.map(p => p.c)).pad(0.15));
