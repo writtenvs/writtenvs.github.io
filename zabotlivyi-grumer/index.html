@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Заботливый грумер — груминг собак и кошек в Самаре</title>
+<meta name="description" content="Зоосалон «Заботливый грумер» в Самаре: комплексная стрижка собак и кошек, мытьё, лапакюр, чистка ушей и зубов. Два филиала: пр. Кирова, 275 и ул. Мира, 15. 5.0 в 2ГИС. Онлайн-запись.">
+<meta property="og:title" content="Заботливый грумер — груминг в Самаре">
+<meta property="og:description" content="Стрижка собак и кошек от 1 900 ₽. 5.0 в 2ГИС. Два филиала.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?w=1200&q=80">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='30' fill='%23ff8a7a'/><text x='50' y='66' font-size='52' text-anchor='middle'>🐾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root { --bg: #fff8f4; --card: #fff; --text: #2c2320; --muted: #7d6f69; --line: #f2e3dc; --accent: #ff7a66; --accent-2: #f0604b; --mint: #bfe8d9; --peach: #ffe3d8; --sky: #d9ecff; --yellow: #ffeaa0; --radius: 26px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Nunito, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; }
+  button { cursor: pointer; }
+  img { display: block; }
+  .container { max-width: 1180px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+  section { scroll-margin-top: 80px; }
+  .sec { padding-top: 90px; padding-bottom: 90px; }
+  .tag { display: inline-block; background: var(--peach); color: var(--accent-2); font-weight: 900; font-size: 13px; letter-spacing: .06em; padding: 7px 14px; border-radius: 999px; margin-bottom: 14px; }
+  h1, h2 { font-weight: 900; letter-spacing: -.02em; }
+  h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.1; margin-bottom: 14px; }
+  h2 span, h1 span { color: var(--accent); }
+  .lead { color: var(--muted); font-size: 18px; max-width: 600px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 999px; padding: 17px 30px; font-weight: 900; font-size: 16px; transition: .2s; white-space: nowrap; }
+  .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 14px 28px rgba(255,122,102,.35); }
+  .btn-accent:hover { background: var(--accent-2); transform: translateY(-2px); }
+  .btn-soft { background: #fff; border: 2px solid var(--line); }
+  .btn-soft:hover { border-color: var(--accent); }
+
+  header { position: sticky; top: 0; z-index: 50; background: rgba(255,248,244,.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 74px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 21px; line-height: 1.1; }
+  .logo i { font-style: normal; width: 44px; height: 44px; border-radius: 14px; background: var(--accent); display: grid; place-items: center; font-size: 24px; }
+  .logo small { display: block; font-size: 12px; color: var(--muted); font-weight: 700; }
+  .menu { display: flex; gap: 26px; font-weight: 800; font-size: 15px; }
+  .menu a:hover { color: var(--accent); }
+  .nav .btn { padding: 12px 22px; font-size: 14px; }
+
+  .hero { padding-top: 50px; padding-bottom: 60px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 50px; align-items: center; }
+  .rate { display: inline-flex; align-items: center; gap: 10px; background: #fff; border: 2px solid var(--line); border-radius: 999px; padding: 8px 16px; font-weight: 800; font-size: 14px; margin-bottom: 22px; }
+  .rate b { color: #f5b400; letter-spacing: 1px; }
+  .hero h1 { font-size: clamp(40px, 5.6vw, 68px); line-height: 1.02; margin-bottom: 20px; }
+  .hero p { color: var(--muted); font-size: 19px; max-width: 500px; margin-bottom: 30px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-facts { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+  .hero-facts span { background: #fff; border-radius: 16px; padding: 12px 16px; font-weight: 800; font-size: 14px; border: 2px solid var(--line); }
+  .hero-img { position: relative; }
+  .blob { border-radius: 46% 54% 42% 58% / 52% 44% 56% 48%; overflow: hidden; aspect-ratio: 1; box-shadow: 0 30px 60px rgba(255,122,102,.2); }
+  .blob img { width: 100%; height: 100%; object-fit: cover; }
+  .sticker { position: absolute; background: #fff; border-radius: 20px; padding: 14px 18px; box-shadow: 0 16px 34px rgba(0,0,0,.1); font-weight: 800; font-size: 14px; }
+  .sticker b { display: block; font-size: 22px; color: var(--accent); }
+  .s1 { left: -10px; bottom: 40px; transform: rotate(-4deg); }
+  .s2 { right: 0; top: 30px; background: var(--yellow); transform: rotate(5deg); }
+
+  .promo { background: var(--mint); border-radius: var(--radius); padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-weight: 800; font-size: 17px; }
+  .promo a { background: #fff; border-radius: 999px; padding: 10px 18px; font-size: 15px; }
+
+  .breeds-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; align-items: start; }
+  .breeds { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .breeds button { background: #fff; border: 2px solid var(--line); border-radius: 18px; padding: 16px; text-align: left; font-weight: 900; font-size: 16px; transition: .2s; }
+  .breeds button small { display: block; color: var(--muted); font-weight: 700; font-size: 13px; }
+  .breeds button:hover { border-color: var(--accent); }
+  .breeds button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .breeds button.on small { color: #ffe3dd; }
+  .price-card { background: #fff; border: 2px solid var(--line); border-radius: var(--radius); padding: 30px; position: sticky; top: 100px; }
+  .price-card h3 { font-size: 26px; font-weight: 900; }
+  .pc-sum { font-size: 52px; font-weight: 900; color: var(--accent); line-height: 1.1; margin: 6px 0; }
+  .pc-note { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .incl { list-style: none; display: grid; gap: 10px; margin: 18px 0 24px; }
+  .incl li { display: flex; gap: 10px; font-size: 15px; font-weight: 700; }
+  .incl li::before { content: "✓"; flex: none; width: 24px; height: 24px; border-radius: 8px; background: var(--mint); display: grid; place-items: center; font-size: 13px; font-weight: 900; }
+
+  .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+  .ex { border-radius: var(--radius); padding: 26px; }
+  .ex i { font-style: normal; font-size: 34px; }
+  .ex h3 { font-size: 20px; font-weight: 900; margin: 10px 0 4px; }
+  .ex p { color: var(--muted); font-size: 15px; }
+  .ex b { display: inline-block; margin-top: 12px; background: #fff; border-radius: 999px; padding: 6px 14px; font-weight: 900; }
+
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+  .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 24px; }
+  .gallery img:nth-child(2) { transform: translateY(24px); }
+  .gallery img:nth-child(4) { transform: translateY(24px); }
+
+  .rev { background: var(--accent); color: #fff; border-radius: 34px; padding: 56px; display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center; }
+  .rev .big { font-size: 110px; font-weight: 900; line-height: .9; }
+  .rev h2 span { color: #fff; }
+  .rev p { color: #ffe6e1; font-size: 17px; }
+  .rev .btn { background: #fff; color: var(--accent-2); }
+
+  .branches { display: grid; grid-template-columns: 1fr 1.3fr; gap: 20px; margin-top: 30px; }
+  .br-list { display: grid; gap: 14px; align-content: start; }
+  .br { background: #fff; border: 2px solid var(--line); border-radius: 22px; padding: 22px; text-align: left; transition: .2s; }
+  .br.on, .br:hover { border-color: var(--accent); }
+  .br b { display: block; font-size: 19px; font-weight: 900; }
+  .br span { display: block; color: var(--muted); font-size: 15px; }
+  .map-box { position: relative; border-radius: 26px; overflow: hidden; min-height: 420px; border: 2px solid var(--line); }
+  #map { position: absolute; inset: 0; z-index: 1; }
+  .leaflet-tile-pane { filter: saturate(.6) brightness(1.05); }
+  .pin { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); border: 4px solid #fff; box-shadow: 0 8px 18px rgba(0,0,0,.25); display: grid; place-items: center; font-size: 20px; }
+
+  .book { background: #fff; border: 2px solid var(--line); border-radius: 34px; padding: 44px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; }
+  .book img { width: 100%; border-radius: 26px; aspect-ratio: 1; object-fit: cover; }
+  .form { display: grid; gap: 12px; }
+  .form input, .form select, .form textarea { width: 100%; padding: 16px 18px; border: 2px solid var(--line); border-radius: 16px; background: var(--bg); font-size: 15px; font-weight: 600; }
+  .form input:focus, .form select:focus { outline: none; border-color: var(--accent); background: #fff; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ok { display: none; background: var(--mint); padding: 14px; border-radius: 16px; font-weight: 800; font-size: 14px; }
+
+  footer { padding: 34px 0 100px; color: var(--muted); font-size: 14px; }
+  footer .container { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .mbar { display: none; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s, transform .8s; }
+  .reveal.in { opacity: 1; transform: none; }
+  .gallery img.reveal.in:nth-child(2), .gallery img.reveal.in:nth-child(4) { transform: translateY(24px); }
+
+  @media (max-width: 1000px) {
+    .menu { display: none; }
+    .hero-grid, .breeds-wrap, .branches, .book { grid-template-columns: 1fr; }
+    .hero-img { max-width: 480px; }
+    .price-card { position: static; }
+    .extras { grid-template-columns: 1fr 1fr; }
+    .gallery { grid-template-columns: 1fr 1fr; }
+    .rev { grid-template-columns: 1fr; text-align: center; padding: 40px 24px; }
+    .book img { display: none; }
+  }
+  @media (max-width: 600px) {
+    .nav .btn { display: none; }
+    .sec { padding-top: 60px; padding-bottom: 60px; }
+    .hero-btns .btn { flex: 1; }
+    .extras { grid-template-columns: 1fr; }
+    .book { padding: 26px 20px; }
+    .rev .big { font-size: 84px; }
+    .pc-sum { font-size: 42px; }
+    .mbar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 60; }
+    .mbar a { padding: 15px; border-radius: 999px; font-weight: 900; text-align: center; font-size: 15px; box-shadow: 0 10px 26px rgba(0,0,0,.2); }
+    .mbar .a1 { background: var(--accent); color: #fff; }
+    .mbar .a2 { background: #fff; color: var(--text); }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="#" class="logo"><i>🐾</i><span>Заботливый грумер<small>зоосалон · Самара</small></span></a>
+    <nav class="menu"><a href="#prices">Цены</a><a href="#extras">Услуги</a><a href="#reviews">Отзывы</a><a href="#branches">Филиалы</a></nav>
+    <a href="#book" class="btn btn-accent">Записаться</a>
+  </div>
+</header>
+
+<section class="hero container">
+  <div class="hero-grid">
+    <div>
+      <span class="rate"><b>★★★★★</b> 5.0 в 2ГИС · 144 оценки</span>
+      <h1>Стрижём <span>с заботой</span> о каждом хвостике</h1>
+      <p>Комплексный груминг собак и кошек: мытьё, стрижка, лапакюр, чистка ушей и зубов. Два филиала в Самаре, ежедневно по записи.</p>
+      <div class="hero-btns">
+        <a href="#prices" class="btn btn-accent">Узнать цену для породы</a>
+        <a href="#book" class="btn btn-soft">Записаться</a>
+      </div>
+      <div class="hero-facts"><span>🐶 Собаки и 🐱 кошки</span><span>🕙 10:00–20:00</span><span>📍 2 филиала</span></div>
+    </div>
+    <div class="hero-img reveal">
+      <div class="blob"><img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?w=900&q=80" alt="Пушистый пёс после груминга"></div>
+      <div class="sticker s2"><b>от 1 900 ₽</b>стрижка кошек</div>
+      <div class="sticker s1"><b>★ 5.0</b>118 отзывов</div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="promo reveal">🎁 Календарь скидок в наших каналах: получайте услуги выгоднее<span style="display:flex;gap:8px"><a href="#">Telegram</a><a href="#">ВКонтакте</a></span></div>
+</div>
+
+<section class="sec container" id="prices">
+  <span class="tag">Цены</span>
+  <h2>Выберите <span>породу</span></h2>
+  <p class="lead">Цена за комплексную стрижку. Точную стоимость мастер назовёт после осмотра: она зависит от состояния шерсти и характера питомца.</p>
+  <div class="breeds-wrap">
+    <div class="breeds" id="breeds"></div>
+    <div class="price-card reveal">
+      <h3 id="pcName">Йоркширский терьер</h3>
+      <div class="pc-sum" id="pcSum">от 2 200 ₽</div>
+      <div class="pc-note" id="pcNote">бритьё под машинку · модельная от 2 400 ₽</div>
+      <b>В комплекс входит:</b>
+      <ul class="incl">
+        <li>Мытьё по типу шерсти: 2 шампуня и кондиционер</li>
+        <li>Сушка, укладка и стрижка на ваш выбор</li>
+        <li>Лапакюр: стрижка и подпиливание когтей</li>
+        <li>Чистка ушей, гигиеническая стрижка</li>
+        <li>Парфюмирование по желанию</li>
+      </ul>
+      <a href="#book" class="btn btn-accent" style="width:100%">Записаться на стрижку</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec container" id="extras" style="padding-top:0">
+  <span class="tag">Ещё услуги</span>
+  <h2>Уход <span>от носа до хвоста</span></h2>
+  <div class="extras">
+    <div class="ex reveal" style="background:var(--sky)"><i>🦷</i><h3>Чистка зубов</h3><p>Пастой, бережно и без стресса</p><b>от 200 ₽</b></div>
+    <div class="ex reveal" style="background:var(--yellow)"><i>✂️</i><h3>Отдельные процедуры</h3><p>Когти, уши, гигиена, вычёсывание</p><b>50–1 000 ₽</b></div>
+    <div class="ex reveal" style="background:var(--mint)"><i>🐱</i><h3>Груминг кошек</h3><p>Комплексная стрижка и уход</p><b>от 1 900 ₽</b></div>
+  </div>
+  <div class="gallery">
+    <img class="reveal" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=500&q=80" alt="" loading="lazy">
+    <img class="reveal" src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=500&q=80" alt="" loading="lazy">
+    <img class="reveal" src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80" alt="" loading="lazy">
+    <img class="reveal" src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=500&q=80" alt="" loading="lazy">
+  </div>
+</section>
+
+<section class="container" id="reviews">
+  <div class="rev reveal">
+    <div class="big">5.0</div>
+    <div><h2>118 отзывов <span>в 2ГИС</span></h2><p>Хозяева пишут, что питомцы возвращаются довольными и красивыми, а мастера находят подход даже к самым пугливым.</p></div>
+    <a class="btn" href="https://2gis.ru/samara/firm/70000001068624562/tab/reviews" target="_blank" rel="noopener">Читать отзывы</a>
+  </div>
+</section>
+
+<section class="sec container" id="branches">
+  <span class="tag">Филиалы</span>
+  <h2>Два салона <span>в Самаре</span></h2>
+  <div class="branches">
+    <div class="br-list" id="brList">
+      <button class="br on" data-i="0"><b>пр. Кирова, 275</b><span>Кировский район · цокольный этаж, первая дверь</span><span>Ежедневно 10:00–20:00, по записи</span></button>
+      <button class="br" data-i="1"><b>ул. Мира, 15</b><span>Второй филиал</span><span>Ежедневно 10:00–20:00, по записи</span></button>
+    </div>
+    <div class="map-box reveal"><div id="map"></div></div>
+  </div>
+</section>
+
+<section class="sec container" id="book" style="padding-top:0">
+  <div class="book reveal">
+    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=700&q=80" alt="" loading="lazy">
+    <form class="form" id="form">
+      <span class="tag">Онлайн-запись</span>
+      <h2 style="font-size:40px">Запишите <span>питомца</span></h2>
+      <div class="row2">
+        <select id="bSel"></select>
+        <select><option>пр. Кирова, 275</option><option>ул. Мира, 15</option></select>
+      </div>
+      <div class="row2"><input type="date" id="date" required><input placeholder="Кличка питомца"></div>
+      <div class="row2"><input required placeholder="Ваше имя"><input required type="tel" placeholder="Телефон"></div>
+      <button class="btn btn-accent" type="submit">Записаться</button>
+      <div class="ok" id="ok">Спасибо! Администратор подтвердит запись 🐾</div>
+    </form>
+  </div>
+</section>
+
+<footer><div class="container"><span>© Заботливый грумер, Самара</span><span>Демо-версия сайта для «Заботливого грумера»</span></div></footer>
+<div class="mbar"><a class="a1" href="#book">Записаться</a><a class="a2" href="#prices">Цены</a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const B = [
+    ['Йоркширский терьер', 2200, 'бритьё под машинку · модельная от 2 400 ₽'],
+    ['Шпиц', 2600, 'комплексная стрижка'],
+    ['Ши-тцу', 2400, 'комплексная стрижка'],
+    ['Пудель', 2100, 'комплексная стрижка'],
+    ['Мальтийская болонка', 2400, 'комплексная стрижка'],
+    ['Пекинес', 2400, 'комплексная стрижка'],
+    ['Кошка', 1900, 'комплексная стрижка кошки'],
+    ['Другая порода', 0, 'рассчитаем по фото питомца']
+  ];
+  const fmt = n => n.toLocaleString('ru-RU') + ' ₽';
+  const box = document.getElementById('breeds');
+  box.innerHTML = B.map((b, i) => `<button data-i="${i}"${i ? '' : ' class="on"'}>${b[0]}<small>${b[1] ? 'от ' + fmt(b[1]) : 'по запросу'}</small></button>`).join('');
+  const bSel = document.getElementById('bSel');
+  bSel.innerHTML = B.map(b => `<option>${b[0]}</option>`).join('');
+  box.addEventListener('click', e => {
+    const btn = e.target.closest('button'); if (!btn) return;
+    box.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === btn));
+    const b = B[+btn.dataset.i];
+    document.getElementById('pcName').textContent = b[0];
+    document.getElementById('pcSum').textContent = b[1] ? 'от ' + fmt(b[1]) : 'по запросу';
+    document.getElementById('pcNote').textContent = b[2] + (b[1] ? ' · на ул. Мира цены чуть выше' : '');
+    bSel.value = b[0];
+  });
+  const d = document.getElementById('date'); const t = new Date(); t.setDate(t.getDate() + 1); d.value = t.toISOString().slice(0, 10);
+  document.getElementById('form').onsubmit = e => { e.preventDefault(); document.getElementById('ok').style.display = 'block'; };
+
+  if (window.L) {
+    const pts = [[53.24261, 50.23541], [53.31421, 50.30529]];
+    const map = L.map('map', { scrollWheelZoom: false });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap', maxZoom: 19 }).addTo(map);
+    const mk = pts.map(p => L.marker(p, { icon: L.divIcon({ className: '', html: '<div class="pin">🐾</div>', iconSize: [44, 44], iconAnchor: [22, 22] }) }).addTo(map));
+    map.fitBounds(L.latLngBounds(pts).pad(0.3));
+    document.getElementById('brList').addEventListener('click', e => {
+      const b = e.target.closest('.br'); if (!b) return;
+      document.querySelectorAll('.br').forEach(x => x.classList.toggle('on', x === b));
+      map.flyTo(pts[+b.dataset.i], 15, { duration: .8 });
+    });
+  }
+
+  if (location.search.includes('shot')) {
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    addEventListener('load', () => { if (location.hash) document.querySelector(location.hash)?.scrollIntoView(); });
+  } else {
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+</script>
+</body>
+</html>
